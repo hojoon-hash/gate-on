@@ -67,11 +67,8 @@ const Index = () => {
             <div className="relative h-[320px] flex items-center justify-center text-primary-foreground">
               <div className="text-center z-10 px-4">
                 <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                  성공의 씨앗이 되는 입찰 정보!
+                  공공 진출의 문을 열다 게이트온
                 </h1>
-                <p className="text-xl md:text-2xl opacity-90">
-                  크제비가 물어다 드려요!
-                </p>
               </div>
             </div>
             
