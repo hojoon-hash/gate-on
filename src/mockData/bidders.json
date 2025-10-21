@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "companyName": "주식회사 피앤씨",
+    "ceoName": "최상권",
+    "businessRegNo": "609-81-6****",
+    "address": "경상남도 창원시",
+    "type": "법인",
+    "recentBid": {
+      "number": "R25BK01054639-000",
+      "title": "스마트생태공장구축사업 바닥공사",
+      "price": "34,604,000원",
+      "organization": "(주)명천공업",
+      "date": "2025-09-26"
+    }
+  },
+  {
+    "id": 2,
+    "companyName": "(주)가나엔지니어링",
+    "ceoName": "홍길동",
+    "businessRegNo": "123-45-67890",
+    "address": "서울특별시 강남구",
+    "type": "법인",
+    "recentBid": {
+      "number": "R25BK01080755-001",
+      "title": "2025년 정보시스템 유지관리 용역",
+      "price": "500,000,000원",
+      "organization": "조달청",
+      "date": "2025-09-28"
+    }
+  },
+  {
+    "id": 3,
+    "companyName": "다라전력",
+    "ceoName": "이순신",
+    "businessRegNo": "222-33-44444",
+    "address": "부산광역시 해운대구",
+    "type": "일반",
+    "recentBid": {
+      "number": "R25BK01049087-000",
+      "title": "[휴사병 전설이 되다!] 드라마 후반작업 제작_CG 용역",
+      "price": "210,000,000원",
+      "organization": "스튜디오드래곤",
+      "date": "2025-09-26"
+    }
+  }
+]

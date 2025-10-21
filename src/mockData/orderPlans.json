@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "type": "일반용역",
+    "number": "R25DD20394601",
+    "title": "원천 생태하천 복원사업 공공사업을 위한 보상업무 지원용역",
+    "organization": "충청남도 당진시",
+    "manager": "김규태",
+    "progressDate": "2025-09-26",
+    "orderDate": "2025-10",
+    "budget": "150,100,000"
+  },
+  {
+    "id": 2,
+    "type": "기술용역",
+    "number": "R25DD20394602",
+    "title": "2025년도 소프트웨어 품질 및 성능 시험 서비스",
+    "organization": "한국정보통신기술협회",
+    "manager": "박정보",
+    "progressDate": "2025-09-25",
+    "orderDate": "2025-11",
+    "budget": "80,000,000"
+  },
+  {
+    "id": 3,
+    "type": "공사",
+    "number": "R25DD20394603",
+    "title": "본청사 증축공사 건설사업관리용역",
+    "organization": "조달청",
+    "manager": "이건축",
+    "progressDate": "2025-09-24",
+    "orderDate": "2025-12",
+    "budget": "1,200,000,000"
+  }
+]

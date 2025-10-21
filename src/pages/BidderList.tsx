@@ -3,30 +3,13 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Star } from "lucide-react";
+import { MagnifyingGlassIcon, StarIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import mockBidders from "@/mockData/bidders.json";
 
 const BidderList = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  
-  // API 연결 예정: 여기에 데이터 fetching 로직 추가
-  const mockData = [
-    {
-      id: 1,
-      companyName: "주식회사 피앤씨",
-      representative: "최상권",
-      businessNumber: "609816****",
-      address: "경상남도 창원시",
-      type: "법인",
-      recentBid: {
-        number: "R25BK01054639-000-0-000",
-        title: "스마트생태공장구축사업 바닥공사",
-        price: "34,604,000",
-        organization: "(주)명천공업",
-        date: "2025-09-26"
-      }
-    },
-  ];
+  const mockData = mockBidders;
 
   return (
     <div className="min-h-screen bg-background">
@@ -37,7 +20,7 @@ const BidderList = () => {
           <div className="mb-6">
             <div className="flex gap-2">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
                 <Input
                   type="text"
                   placeholder="기업명/대표자명/사업자등록번호를 입력하세요."
@@ -47,7 +30,7 @@ const BidderList = () => {
                 />
               </div>
               <Button>
-                <Search className="w-4 h-4" />
+                <MagnifyingGlassIcon className="w-4 h-4" />
               </Button>
             </div>
           </div>
@@ -104,51 +87,46 @@ const BidderList = () => {
 
               <div className="border rounded-lg overflow-hidden">
                 <table className="w-full">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">관심</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">번호</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">기업명</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">대표자</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">사업자등록번호</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">주소</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium" colSpan={4}>최근 낙찰 공고</th>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <th colSpan={6}></th>
-                      <th className="border-b px-4 py-2 text-left text-xs font-medium">공고번호<br />공고명</th>
-                      <th className="border-b px-4 py-2 text-left text-xs font-medium">추정 가격</th>
-                      <th className="border-b px-4 py-2 text-left text-xs font-medium">공고기관<br />수요기관</th>
-                      <th className="border-b px-4 py-2 text-left text-xs font-medium">최종낙찰일</th>
+                      <th className="px-4 py-3 text-center text-xs font-semibold text-gray-800">관심</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">번호</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">기업명</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">대표자</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">사업자등록번호</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">주소</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">최근 낙찰 공고</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">추정 가격</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">공고기관</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">최종낙찰일</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {/* API 연결 예정: mockData를 실제 API 데이터로 교체 */}
                     {mockData.map((item, index) => (
                       <tr key={item.id} className="hover:bg-gray-50">
-                        <td className="border-b px-4 py-3">
+                        <td className="border-b border-gray-200 px-4 py-3 text-center">
                           <button className="text-gray-400 hover:text-yellow-500">
-                            <Star className="w-5 h-5" />
+                            <StarIcon className="w-5 h-5" />
                           </button>
                         </td>
-                        <td className="border-b px-4 py-3 text-sm">434,{569 - index}</td>
-                        <td className="border-b px-4 py-3">
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">434,{569 - index}</td>
+                        <td className="border-b border-gray-200 px-4 py-3">
                           <div className="flex items-center gap-2">
                             <span className="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded">{item.type}</span>
-                            <span className="text-sm font-medium">{item.companyName}</span>
+                            <span className="text-sm font-medium text-gray-800">{item.companyName}</span>
                           </div>
                         </td>
-                        <td className="border-b px-4 py-3 text-sm">{item.representative}</td>
-                        <td className="border-b px-4 py-3 text-sm">{item.businessNumber}</td>
-                        <td className="border-b px-4 py-3 text-sm">{item.address}</td>
-                        <td className="border-b px-4 py-3">
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.ceoName}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.businessRegNo}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.address}</td>
+                        <td className="border-b border-gray-200 px-4 py-3">
                           <div className="text-xs text-blue-600">[공사]</div>
-                          <div className="text-xs text-muted-foreground mb-1">조달청 {item.recentBid.number}</div>
-                          <div className="text-sm">{item.recentBid.title}</div>
+                          <div className="text-xs text-gray-500 mb-1">조달청 {item.recentBid.number}</div>
+                          <div className="text-sm font-medium text-gray-800">{item.recentBid.title}</div>
                         </td>
-                        <td className="border-b px-4 py-3 text-sm font-medium text-[#dc2626]">{item.recentBid.price}</td>
-                        <td className="border-b px-4 py-3 text-sm">{item.recentBid.organization}</td>
-                        <td className="border-b px-4 py-3 text-sm">{item.recentBid.date}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm font-medium text-red-600">{item.recentBid.price}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.recentBid.organization}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.recentBid.date}</td>
                       </tr>
                     ))}
                   </tbody>

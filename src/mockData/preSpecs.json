@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "type": "일반용역",
+    "status": "마감",
+    "number": "R25BD00120019",
+    "title": "평택세관 감시종합정보시스템 재구축사업",
+    "organization": "관세청 평택세관",
+    "budget": "1,459,302,490",
+    "announcementOrg": "조달청 인천지방조달청",
+    "manager": "최찬수",
+    "phone": "070-4056-7867",
+    "progressDate": "2025-09-26",
+    "deadline": "2025-09-29 23:59:00"
+  },
+  {
+    "id": 2,
+    "type": "물품",
+    "status": "진행중",
+    "number": "R25BD00120020",
+    "title": "노후 네트워크 스위치 교체 사업",
+    "organization": "정부청사관리본부",
+    "budget": "500,000,000",
+    "announcementOrg": "조달청",
+    "manager": "김네트",
+    "phone": "070-1234-5678",
+    "progressDate": "2025-09-27",
+    "deadline": "2025-10-05 18:00:00"
+  },
+  {
+    "id": 3,
+    "type": "공사",
+    "status": "진행중",
+    "number": "R25BD00120021",
+    "title": "본관동 승강기 교체 공사",
+    "organization": "서울특별시교육청",
+    "budget": "250,000,000",
+    "announcementOrg": "서울특별시교육청",
+    "manager": "박승강",
+    "phone": "02-111-2222",
+    "progressDate": "2025-09-28",
+    "deadline": "2025-10-10 14:00:00"
+  }
+]

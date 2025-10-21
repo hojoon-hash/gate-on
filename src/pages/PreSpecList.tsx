@@ -3,29 +3,13 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Star } from "lucide-react";
+import { MagnifyingGlassIcon, StarIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import mockPreSpecs from "@/mockData/preSpecs.json";
 
 const PreSpecList = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  
-  // API 연결 예정: 여기에 데이터 fetching 로직 추가
-  const mockData = [
-    {
-      id: 1,
-      type: "일반용역",
-      status: "마감",
-      number: "R25BD00120019",
-      title: "평택세관 감시종합정보시스템 재구축사업",
-      organization: "관세청 평택세관",
-      budget: "1,459,302,490",
-      announcementOrg: "조달청 인천지방조달청",
-      manager: "최찬수",
-      phone: "070-4056-7867",
-      progressDate: "2025-09-26",
-      deadline: "2025-09-29 23:59:00"
-    },
-  ];
+  const mockData = mockPreSpecs;
 
   return (
     <div className="min-h-screen bg-background">
@@ -36,7 +20,7 @@ const PreSpecList = () => {
           <div className="mb-6">
             <div className="flex gap-2">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
                 <Input
                   type="text"
                   placeholder="사업명/사전규격등록번호/수요기관/공고기관/담당자명 정보를 검색해 주세요."
@@ -117,48 +101,47 @@ const PreSpecList = () => {
 
               <div className="border rounded-lg overflow-hidden">
                 <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">관심</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">번호</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">업무구분</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">진행상태</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">사전규격등록번호<br />사업명</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">수요기관</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">배정예산액</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">공고기관</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">담당자<br />(연락처)</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">진행일자</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">의견등록마감일시</th>
+                  <thead>
+                    <tr className="bg-gray-50 border-b border-gray-200">
+                      <th className="px-4 py-3 text-center text-xs font-semibold text-gray-800">관심</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">번호</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">업무구분</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">진행상태</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">사전규격등록번호<br />사업명</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">수요기관</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">배정예산액</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">공고기관</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">담당자<br />(연락처)</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">진행일자</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">의견등록마감일시</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {/* API 연결 예정: mockData를 실제 API 데이터로 교체 */}
                     {mockData.map((item, index) => (
-                      <tr key={item.id} className="hover:bg-gray-50 cursor-pointer">
-                        <td className="border-b px-4 py-3">
+                      <tr key={item.id} className="hover:bg-gray-50">
+                        <td className="border-b border-gray-200 px-4 py-3 text-center">
                           <button className="text-gray-400 hover:text-yellow-500">
-                            <Star className="w-5 h-5" />
+                            <StarIcon className="w-5 h-5" />
                           </button>
                         </td>
-                        <td className="border-b px-4 py-3 text-sm">4,{751 - index}</td>
-                        <td className="border-b px-4 py-3 text-sm">{item.type}</td>
-                        <td className="border-b px-4 py-3">
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">4,{751 - index}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.type}</td>
+                        <td className="border-b border-gray-200 px-4 py-3">
                           <span className="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">{item.status}</span>
                         </td>
-                        <td className="border-b px-4 py-3">
-                          <div className="text-xs text-muted-foreground mb-1">{item.number}</div>
-                          <div className="text-sm font-medium">{item.title}</div>
+                        <td className="border-b border-gray-200 px-4 py-3">
+                          <div className="text-xs text-gray-500 mb-1">{item.number}</div>
+                          <div className="text-sm font-medium text-blue-600">{item.title}</div>
                         </td>
-                        <td className="border-b px-4 py-3 text-sm">{item.organization}</td>
-                        <td className="border-b px-4 py-3 text-sm font-medium text-[#dc2626]">{item.budget}</td>
-                        <td className="border-b px-4 py-3 text-sm">{item.announcementOrg}</td>
-                        <td className="border-b px-4 py-3 text-sm">
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.organization}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm font-medium text-red-600">{item.budget}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.announcementOrg}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm">
                           <div>{item.manager}</div>
-                          <div className="text-xs text-muted-foreground">({item.phone})</div>
+                          <div className="text-xs text-gray-500">({item.phone})</div>
                         </td>
-                        <td className="border-b px-4 py-3 text-sm text-blue-600">{item.progressDate}</td>
-                        <td className="border-b px-4 py-3 text-sm text-[#dc2626]">{item.deadline}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.progressDate}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-red-600">{item.deadline}</td>
                       </tr>
                     ))}
                   </tbody>

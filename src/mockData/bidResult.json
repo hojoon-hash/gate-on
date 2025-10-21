@@ -1,0 +1,44 @@
+
+{
+  "bidInfo": {
+    "noticeNo": "2025-000123-01",
+    "title": "전자지하차도진입차단시설설치 전기공사",
+    "institution": "서울특별시 강남구청",
+    "openingDate": "2025-11-13T11:00:00",
+    "estimatedPrice": "145,000,000 원"
+  },
+  "resultSummary": {
+    "winnerName": "(주)미래전력",
+    "bidAmount": "127,890,500 원",
+    "bidRate": "88.2003%",
+    "adjustmentRate": "99.98%",
+    "lowerLimitPrice": "127,242,750 원"
+  },
+  "prelimPrices": {
+    "prices": [
+      {"price": "147,125,000", "selected": true},
+      {"price": "146,500,000", "selected": false},
+      {"price": "145,875,000", "selected": true},
+      {"price": "145,250,000", "selected": false},
+      {"price": "144,625,000", "selected": false},
+      {"price": "144,000,000", "selected": true},
+      {"price": "143,375,000", "selected": false},
+      {"price": "142,750,000", "selected": false},
+      {"price": "142,125,000", "selected": false},
+      {"price": "141,500,000", "selected": true},
+      {"price": "140,875,000", "selected": false},
+      {"price": "140,250,000", "selected": false},
+      {"price": "139,625,000", "selected": false},
+      {"price": "139,000,000", "selected": false},
+      {"price": "138,375,000", "selected": false}
+    ],
+    "selectionCount": 4
+  },
+  "bidders": [
+    {"rank": 1, "name": "(주)미래전력", "bidAmount": "127,890,500", "bidRate": "88.2003%", "remarks": ""},
+    {"rank": 2, "name": "(주)한국전기", "bidAmount": "127,910,000", "bidRate": "88.2138%", "remarks": ""},
+    {"rank": 3, "name": "세종전력공사", "bidAmount": "128,100,000", "bidRate": "88.3448%", "remarks": ""},
+    {"rank": 4, "name": "(주)가나전기", "bidAmount": "128,250,000", "bidRate": "88.4483%", "remarks": ""},
+    {"rank": 5, "name": "대한전력(주)", "bidAmount": "128,300,000", "bidRate": "88.4828%", "remarks": ""}
+  ]
+}

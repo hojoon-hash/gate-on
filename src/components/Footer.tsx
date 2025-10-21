@@ -1,4 +1,5 @@
 import logo from "@/assets/gateon-logo.jpg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -34,8 +35,8 @@ const Footer = () => {
             <h4 className="font-bold mb-4">회사</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="#" className="hover:text-primary transition-colors">회사 소개</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">개인정보처리방침</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">이용약관</a></li>
+              <li><Link to="/privacy-policy" className="hover:text-primary transition-colors">개인정보처리방침</Link></li>
+              <li><Link to="/terms-of-service" className="hover:text-primary transition-colors">이용약관</Link></li>
             </ul>
           </div>
         </div>

@@ -1,29 +1,19 @@
+
 import Header from "@/components/Header";
 import SearchFilter from "@/components/SearchFilter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Star } from "lucide-react";
+import { MagnifyingGlassIcon, StarIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import mockResults from "@/mockData/results.json";
 
 const BidResultList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   
-  // API 연결 예정: 여기에 데이터 fetching 로직 추가
-  const mockData = [
-    {
-      id: 1,
-      number: "R25BK01049087-000-0-000",
-      title: "[휴사병 전설이 되다! 드라마 후반작업 제작_CG 용역",
-      category: "용역",
-      badges: ["일", "공", "전"],
-      contractMethod: "제한경쟁",
-      estimatedPrice: "210,000,000",
-      winner: "[전규]",
-      organization: "스튜디오드래곤",
-      postedAt: "2025-09-26 17:00"
-    },
-  ];
+  const results = mockResults;
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,7 +24,7 @@ const BidResultList = () => {
           <div className="mb-6">
             <div className="flex gap-2">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
                 <Input
                   type="text"
                   placeholder="검색어를 입력해 주세요."
@@ -44,7 +34,7 @@ const BidResultList = () => {
                 />
               </div>
               <Button>
-                <Search className="w-4 h-4" />
+                <MagnifyingGlassIcon className="w-4 h-4" />
               </Button>
             </div>
           </div>
@@ -56,7 +46,7 @@ const BidResultList = () => {
 
             <div className="flex-1">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold">결과 공고 <span className="text-muted-foreground">[검색결과 14,239건]</span></h2>
+                <h2 className="text-xl font-bold">결과 공고 <span className="text-muted-foreground">[검색결과 {results.length}건]</span></h2>
                 <div className="flex gap-2">
                   <Select defaultValue="posted_desc">
                     <SelectTrigger className="w-32">
@@ -79,45 +69,36 @@ const BidResultList = () => {
                 </div>
               </div>
 
-              <div className="space-y-4">
-                {/* API 연결 예정: mockData를 실제 API 데이터로 교체 */}
-                {mockData.map((item) => (
-                  <div key={item.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
-                    <div className="flex items-start gap-4">
-                      <button className="text-gray-400 hover:text-yellow-500 mt-1">
-                        <Star className="w-5 h-5" />
-                      </button>
-                      <div className="flex-1">
-                        <div className="flex gap-1 mb-2">
-                          <span className="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded">일</span>
-                          <span className="px-2 py-0.5 bg-green-100 text-green-800 text-xs rounded">공</span>
-                          <span className="px-2 py-0.5 bg-purple-100 text-purple-800 text-xs rounded">전</span>
-                          <span className="px-2 py-0.5 bg-orange-100 text-orange-800 text-xs rounded">{item.category}</span>
-                        </div>
-                        <div className="text-xs text-muted-foreground mb-1">조달청 {item.number}</div>
-                        <h3 className="text-base font-bold mb-2">{item.title}</h3>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                          <div>
-                            <span className="text-muted-foreground">낙찰자: </span>
-                            <span className="font-medium">{item.winner}</span>
-                          </div>
-                          <div>
-                            <span className="text-muted-foreground">계약방법: </span>
-                            <span>{item.contractMethod}</span>
-                          </div>
-                          <div>
-                            <span className="text-muted-foreground">추정가격: </span>
-                            <span className="font-medium text-[#dc2626]">{item.estimatedPrice}</span>
-                          </div>
-                          <div>
-                            <span className="text-muted-foreground">게시일시: </span>
-                            <span>{item.postedAt}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              {/* Refactored to a table layout for consistency */}
+              <div className="border rounded-lg overflow-hidden">
+                <table className="w-full">
+                  <thead>
+                    <tr className="bg-gray-50 border-b border-gray-200">
+                      <th className="px-4 py-3 text-center text-xs font-semibold text-gray-800">관심</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">공고명</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">낙찰업체</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">개찰일시</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {results.map((result) => (
+                      <tr key={result.id} className="hover:bg-gray-50">
+                        <td className="border-b border-gray-200 px-4 py-3 text-center">
+                          <button className="text-gray-400 hover:text-yellow-500">
+                            <StarIcon className="w-5 h-5" />
+                          </button>
+                        </td>
+                        <td className="border-b border-gray-200 px-4 py-3">
+                          <Link to={`/bid-result/${result.id}`} className="hover:underline text-blue-600 font-semibold">
+                            {result.noticeTitle}
+                          </Link>
+                        </td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{result.winnerName}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{format(new Date(result.openingDate), 'yyyy-MM-dd HH:mm')}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
 
               <div className="flex justify-center gap-2 mt-6">

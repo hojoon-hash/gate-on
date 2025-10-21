@@ -16,6 +16,15 @@ import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Inquiry from "./pages/Inquiry";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import BidDetailPage from "./pages/BidDetail";
+import BidResultPage from "./pages/BidResult";
+import Dashboard from "./pages/Dashboard";
+import CustomSearch from "./pages/CustomSearch";
+import NotificationSettings from "./pages/NotificationSettings";
+import DeadlineSoon from "./pages/DeadlineSoon";
+import Favorites from "./pages/Favorites";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +37,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/custom-search" element={<CustomSearch />} />
+          <Route path="/notification-settings" element={<NotificationSettings />} />
+          <Route path="/deadline-soon" element={<DeadlineSoon />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/bid/list" element={<BidList />} />
           <Route path="/bid-result/list" element={<BidResultList />} />
           <Route path="/bidder/list" element={<BidderList />} />
@@ -38,6 +52,10 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/inquiry" element={<Inquiry />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/bid/:id" element={<BidDetailPage />} />
+          <Route path="/bid-result/:id" element={<BidResultPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

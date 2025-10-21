@@ -3,26 +3,14 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Star } from "lucide-react";
+import { MagnifyingGlassIcon, StarIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import mockOrderPlans from "@/mockData/orderPlans.json";
+import SearchFilter from "@/components/SearchFilter";
 
 const OrderPlanList = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  
-  // API 연결 예정: 여기에 데이터 fetching 로직 추가
-  const mockData = [
-    {
-      id: 1,
-      type: "일반용역",
-      number: "R25DD20394601",
-      title: "원천 생태하천 복원사업 공공사업을 위한 보상업무 지원용역",
-      organization: "충청남도 당진시",
-      manager: "김규태",
-      progressDate: "2025-09-26",
-      orderDate: "2025-10",
-      budget: "150,100,000"
-    },
-  ];
+  const mockData = mockOrderPlans;
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,7 +21,7 @@ const OrderPlanList = () => {
           <div className="mb-6">
             <div className="flex gap-2">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
                 <Input
                   type="text"
                   placeholder="사업명/수요기관/발주계획번호/담당자 정보를 검색해 주세요."
@@ -43,7 +31,7 @@ const OrderPlanList = () => {
                 />
               </div>
               <Button>
-                <Search className="w-4 h-4" />
+                <MagnifyingGlassIcon className="w-4 h-4" />
               </Button>
             </div>
           </div>
@@ -114,39 +102,38 @@ const OrderPlanList = () => {
 
               <div className="border rounded-lg overflow-hidden">
                 <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">관심</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">번호</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">업무구분</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">발주계획번호<br />사업명</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">수요기관</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">담당자</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">진행일자</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">발주시기</th>
-                      <th className="border-b px-4 py-3 text-left text-sm font-medium">예산금액</th>
+                  <thead>
+                    <tr className="bg-gray-50 border-b border-gray-200">
+                      <th className="px-4 py-3 text-center text-xs font-semibold text-gray-800">관심</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">번호</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">업무구분</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">발주계획번호<br />사업명</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">수요기관</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">담당자</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">진행일자</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">발주시기</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-800">예산금액</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {/* API 연결 예정: mockData를 실제 API 데이터로 교체 */}
                     {mockData.map((item, index) => (
-                      <tr key={item.id} className="hover:bg-gray-50 cursor-pointer">
-                        <td className="border-b px-4 py-3">
+                      <tr key={item.id} className="hover:bg-gray-50">
+                        <td className="border-b border-gray-200 px-4 py-3 text-center">
                           <button className="text-gray-400 hover:text-yellow-500">
-                            <Star className="w-5 h-5" />
+                            <StarIcon className="w-5 h-5" />
                           </button>
                         </td>
-                        <td className="border-b px-4 py-3 text-sm">10,{876 - index}</td>
-                        <td className="border-b px-4 py-3 text-sm">{item.type}</td>
-                        <td className="border-b px-4 py-3">
-                          <div className="text-xs text-muted-foreground mb-1">{item.number}</div>
-                          <div className="text-sm font-medium">{item.title}</div>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">10,{876 - index}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.type}</td>
+                        <td className="border-b border-gray-200 px-4 py-3">
+                          <div className="text-xs text-gray-500 mb-1">{item.number}</div>
+                          <div className="text-sm font-medium text-blue-600">{item.title}</div>
                         </td>
-                        <td className="border-b px-4 py-3 text-sm">{item.organization}</td>
-                        <td className="border-b px-4 py-3 text-sm">{item.manager}</td>
-                        <td className="border-b px-4 py-3 text-sm text-blue-600">{item.progressDate}</td>
-                        <td className="border-b px-4 py-3 text-sm text-blue-600">{item.orderDate}</td>
-                        <td className="border-b px-4 py-3 text-sm font-medium text-[#dc2626]">{item.budget}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.organization}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.manager}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.progressDate}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm text-gray-800">{item.orderDate}</td>
+                        <td className="border-b border-gray-200 px-4 py-3 text-sm font-medium text-red-600">{item.budget}</td>
                       </tr>
                     ))}
                   </tbody>

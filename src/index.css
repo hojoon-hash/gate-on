@@ -8,39 +8,39 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 100%; /* #FFFFFF */
+    --foreground: 216 20% 17%; /* #1F2937 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 216 20% 17%; /* #1F2937 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground: 216 20% 17%; /* #1F2937 */
 
-    /* GateOn Blue - Primary brand color */
-    --primary: 208 100% 45%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary Color: #2563EB */
+    --primary: 217 91% 53%;
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
     
-    /* GateOn Orange - Accent color */
-    --secondary: 25 100% 55%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary/Accent Color: Green #10B981 (using for accent) */
+    --secondary: 150 60% 40%; /* #10B981 */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 210 17% 98%; /* #F9FAFB */
+    --muted-foreground: 218 11% 46%; /* #6B7280 */
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 210 17% 98%; /* #F9FAFB */
+    --accent-foreground: 216 20% 17%; /* #1F2937 */
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%; /* Default red */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 208 100% 45%;
+    --border: 220 14% 91%; /* #E5E7EB */
+    --input: 220 14% 91%; /* #E5E7EB */
+    --ring: 217 91% 60%; /* #3B82F6 (focus ring) */
 
     --radius: 0.5rem;
 
-    /* GateOn gradients and effects */
+    /* GateOn gradients and effects (keeping existing for now, can refine later) */
     --gradient-hero: linear-gradient(135deg, hsl(208 100% 45%), hsl(208 100% 55%));
     --gradient-accent: linear-gradient(135deg, hsl(25 100% 55%), hsl(35 100% 60%));
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
@@ -86,5 +86,6 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
   }
 }

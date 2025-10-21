@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import gateonLogo from "@/assets/gateon-logo.jpg";
 
@@ -12,45 +13,83 @@ const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberEmail, setRememberEmail] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  useEffect(() => {
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    if (rememberedEmail) {
+      setEmail(rememberedEmail);
+      setRememberEmail(true);
+    }
+  }, []);
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    console.log('Auth attempt started. Mode:', isLogin ? 'Login' : 'Sign-up');
 
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
+        console.log('Attempting to sign in with email:', email);
+        const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
-        if (error) throw error;
+
+        if (error) {
+          console.error('Login Error:', error.message);
+          throw error;
+        }
+
+        console.log('Sign-in successful, session data:', data.session);
+
+        // Remember ID logic
+        if (rememberEmail) {
+          localStorage.setItem('rememberedEmail', email);
+          console.log('Email remembered.');
+        } else {
+          localStorage.removeItem('rememberedEmail');
+          console.log('Email not remembered.');
+        }
+
+        toast({ title: "로그인 성공", description: "대시보드로 이동합니다." });
         navigate("/dashboard");
+
       } else {
-        const { error } = await supabase.auth.signUp({
+        console.log('Attempting to sign up with email:', email);
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             emailRedirectTo: `${window.location.origin}/dashboard`,
           },
         });
-        if (error) throw error;
+
+        if (error) {
+          console.error('Sign-up Error:', error.message);
+          throw error;
+        }
+
+        console.log('Sign-up successful, user data:', data.user);
         toast({
-          title: "회원가입 완료",
-          description: "로그인하여 서비스를 이용하세요.",
+          title: "가입 인증 메일 발송",
+          description: "이메일 받은 편지함을 확인하여 가입을 완료해주세요.",
+          duration: 5000,
         });
-        setIsLogin(true);
       }
     } catch (error: any) {
+      console.error('Caught an error:', error);
       toast({
-        title: "오류",
-        description: error.message,
+        title: "오류가 발생했습니다",
+        description: error.message || "알 수 없는 오류가 발생했습니다.",
         variant: "destructive",
       });
     } finally {
       setLoading(false);
+      console.log('Auth attempt finished.');
     }
   };
 
@@ -109,17 +148,26 @@ const Auth = () => {
                 minLength={6}
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <div className="flex items-center space-x-2">
+              <Checkbox id="remember" checked={rememberEmail} onCheckedChange={(checked) => setRememberEmail(checked as boolean)} />
+              <label
+                htmlFor="remember"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                이메일 저장
+              </label>
+            </div>
+            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-500" disabled={loading}>
               {loading ? "처리중..." : isLogin ? "로그인" : "회원가입"}
             </Button>
           </form>
           
           <div className="my-6 relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border"></div>
+              <div className="w-full border-t border-gray-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-card text-muted-foreground">또는</span>
+              <span className="px-2 bg-white text-gray-500">또는</span>
             </div>
           </div>
 
@@ -156,7 +204,7 @@ const Auth = () => {
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-blue-600 hover:underline"
             >
               {isLogin ? "계정이 없으신가요? 회원가입" : "이미 계정이 있으신가요? 로그인"}
             </button>
