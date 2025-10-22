@@ -17,7 +17,7 @@ const Section = ({ title, children }: { title: string, children: React.ReactNode
 );
 
 const SearchFilter = () => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   // To make this a fully controlled component, you would have a useState for each input.
   // For now, we are just ensuring the UI renders without crashing.

@@ -16,7 +16,7 @@ const BidList = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+
       
       <div className="pt-20 pb-8">
         <div className="container mx-auto px-4">
@@ -39,15 +39,14 @@ const BidList = () => {
             </div>
           </div>
 
-          <div className="flex gap-6">
-            {/* 검색 필터 (왼쪽) */}
-            <div className="w-80 shrink-0">
-              <SearchFilter />
-            </div>
+          {/* 검색 필터 (상단) */}
+          <div className="mb-6">
+            <SearchFilter />
+          </div>
 
-            {/* 메인 컨텐츠 (오른쪽) */}
-            <div className="flex-1">
-              {/* 헤더 */}
+          {/* 메인 컨텐츠 */}
+          <div className="flex-1">
+            {/* 헤더 */}
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold">입찰 공고 <span className="text-muted-foreground">[검색결과 {bids.length}건]</span></h2>
                 <div className="flex gap-2">
@@ -120,7 +119,6 @@ const BidList = () => {
                 <Button variant="outline" size="sm">3</Button>
                 <Button variant="outline" size="sm">다음</Button>
               </div>
-            </div>
           </div>
         </div>
       </div>

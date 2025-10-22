@@ -1,4 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 // [초보자 참고] TypeScript 인터페이스를 사용해 데이터의 구조를 미리 정의합니다.
 // 이렇게 하면 'result' prop으로 어떤 데이터가 들어와야 하는지 명확해지고, 자동완성 기능도 활성화됩니다.
@@ -80,16 +88,34 @@ const InfoRow: React.FC<{ label: string; value: React.ReactNode }> = ({ label, v
 // [초보자 참고] 메인 컴포넌트입니다. 개찰 결과 전체 데이터를 'result' prop으로 받아서 화면에 그려줍니다.
 // [For Beginners] This is the main component. It receives all the bid result data via the 'result' prop and renders it.
 const BidResultView: React.FC<BidResultViewProps> = ({ result }) => {
-  
-  // [초보자 참고] 날짜 형식을 'YYYY-MM-DD HH:mm'으로 바꿔주는 함수입니다.
-  // [For Beginners] A function to format dates into 'YYYY-MM-DD HH:mm'.
-  const formatDate = (dateString: string) => {
-    if (!dateString) return '정보 없음';
-    const date = new Date(dateString);
-    return date.toLocaleString('ko-KR', {
-      year: 'numeric', month: '2-digit', day: '2-digit',
-      hour: '2-digit', minute: '2-digit', hour12: false
-    }).replace(/\. /g, '-').replace(/\.$/, '').replace(/ /g,'');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
+
+  // [초보자 참고] 페이지네이션 계산 로직
+  // [For Beginners] Pagination calculation logic
+
+  // 1. 전체 페이지 수 계산
+  // allBidders.length: 전체 아이템 개수 (예: 35)
+  // itemsPerPage: 페이지당 아이템 수 (예: 10)
+  // Math.ceil()은 소수점을 올림하여 전체 페이지 수를 구합니다. (예: 3.5 -> 4 페이지)
+  const totalPages = Math.ceil(result.bidders.length / itemsPerPage);
+
+  // 2. 현재 페이지에 보여줄 데이터의 시작/끝 인덱스 계산
+  // currentPage가 2라면, startIndex는 (2-1)*10 = 10, endIndex는 10+10 = 20이 됩니다.
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // 3. 데이터 슬라이싱: 원본 배열에서 현재 페이지에 해당하는 부분만 잘라냅니다.
+  // array.slice(startIndex, endIndex)는 startIndex부터 endIndex '전'까지의 항목을 복사하여 새 배열을 만듭니다.
+  // 예: .slice(10, 20)는 인덱스 10부터 19까지의 아이템을 가져옵니다.
+  const currentBidders = result.bidders.slice(startIndex, endIndex);
+
+  // 페이지 변경을 처리하는 함수
+  const handlePageChange = (page: number) => {
+    // 요청된 페이지 번호가 1과 전체 페이지 수 사이에 있을 때만 상태를 변경합니다.
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   return (
@@ -140,8 +166,6 @@ const BidResultView: React.FC<BidResultViewProps> = ({ result }) => {
       <InfoSection title="개찰 순위">
         <div className="overflow-x-auto border rounded-lg">
           <table className="min-w-full text-center">
-            {/* [초보자 참고] a,b,c,d,e 태그는 테이블의 구조를 정의합니다. */}
-            {/* [For Beginners] The thead, tbody, tr, th, and td tags define the table's structure. */}
             <thead className="bg-gray-100 border-b">
               <tr>
                 <th className="p-3 text-sm font-semibold text-gray-700">순위</th>
@@ -152,9 +176,9 @@ const BidResultView: React.FC<BidResultViewProps> = ({ result }) => {
               </tr>
             </thead>
             <tbody>
-              {/* [초보자 참고] .map() 함수를 사용해 입찰자 목록을 순회하며 테이블 행(<tr>)을 만듭니다. */}
-              {/* [For Beginners] The .map() function is used to loop through the list of bidders and create table rows (<tr>). */}
-              {result.bidders.map((bidder) => (
+              {/* [초보자 참고] 이제 전체 데이터(result.bidders)가 아닌, 현재 페이지용으로 잘라낸 'currentBidders'를 사용해 테이블을 그립니다. */}
+              {/* [For Beginners] Now, we use 'currentBidders', the sliced data for the current page, to render the table instead of the full 'result.bidders' data. */}
+              {currentBidders.map((bidder) => (
                 <tr key={bidder.rank} className={`border-b ${bidder.rank === 1 ? 'bg-yellow-50' : 'hover:bg-gray-50'}`}>
                   <td className="p-3 text-sm text-gray-800">{bidder.rank}</td>
                   <td className="p-3 text-sm text-gray-800 text-left">{bidder.name}</td>
@@ -166,9 +190,49 @@ const BidResultView: React.FC<BidResultViewProps> = ({ result }) => {
             </tbody>
           </table>
         </div>
-        {/* [초보자 참고] 페이지네이션은 나중에 구현될 기능으로, 지금은 자리를 비워둡니다. */}
-        {/* [For Beginners] Pagination is a feature to be implemented later, so we leave a placeholder for now. */}
-        <div className="mt-4 text-center text-gray-500">[페이지네이션 영역]</div>
+        {/* 페이지네이션 컴포넌트 */}
+        <Pagination className="mt-4">
+          <PaginationContent>
+            <PaginationItem>
+              {/* [초보자 참고] 조건부 비활성화: 현재 페이지가 1이면, Tailwind CSS 클래스를 적용해 버튼을 비활성화된 것처럼 보이게 합니다. */}
+              {/* [For Beginners] Conditional Disabling: If the current page is 1, apply Tailwind CSS classes to make the button look disabled. */}
+              <PaginationPrevious
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(currentPage - 1);
+                }}
+                className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+              />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, i) => (
+              <PaginationItem key={i}>
+                <PaginationLink
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePageChange(i + 1);
+                  }}
+                  isActive={currentPage === i + 1}
+                >
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              {/* [초보자 참고] 조건부 비활성화: 현재 페이지가 마지막 페이지이면, 버튼을 비활성화된 것처럼 보이게 합니다. */}
+              {/* [For Beginners] Conditional Disabling: If the current page is the last page, make the button look disabled. */}
+              <PaginationNext
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(currentPage + 1);
+                }}
+                className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </InfoSection>
 
     </div>

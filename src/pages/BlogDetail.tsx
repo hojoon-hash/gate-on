@@ -1,5 +1,4 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -50,13 +49,11 @@ const BlogDetail = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <main className="pt-24 pb-16">
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="text-center text-muted-foreground">로딩 중...</div>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
@@ -64,67 +61,63 @@ const BlogDetail = () => {
   if (!post) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <main className="pt-24 pb-16">
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="text-center text-muted-foreground">블로그 포스트를 찾을 수 없습니다</div>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      <main className="pt-24 pb-16">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/blog')}
-            className="mb-6"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            목록으로
-          </Button>
-
-          <Card className="overflow-hidden">
-            {post.thumbnail_url && (
-              <div className="aspect-video bg-muted overflow-hidden">
-                <img
-                  src={post.thumbnail_url}
-                  alt={post.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
+          <div className="min-h-screen bg-background">
             
-            <div className="p-8">
-              <div className="border-b border-border pb-6 mb-6">
-                <h1 className="text-3xl font-bold text-foreground mb-4">
-                  {post.title}
-                </h1>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <span>{format(new Date(post.created_at), 'yyyy-MM-dd HH:mm')}</span>
-                  <span>조회 {post.views}</span>
+          <main className="pt-24 pb-16">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <Button
+                variant="ghost"
+                onClick={() => navigate('/blog')}
+                className="mb-6"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                목록으로
+              </Button>
+    
+              <Card className="overflow-hidden">
+                {post.thumbnail_url && (
+                  <div className="aspect-video bg-muted overflow-hidden">
+                    <img
+                      src={post.thumbnail_url}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                
+                <div className="p-8">
+                  <div className="border-b border-border pb-6 mb-6">
+                    <h1 className="text-3xl font-bold text-foreground mb-4">
+                      {post.title}
+                    </h1>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <span>{format(new Date(post.created_at), 'yyyy-MM-dd HH:mm')}</span>
+                      <span>조회 {post.views}</span>
+                    </div>
+                  </div>
+    
+                  <div className="prose prose-slate max-w-none">
+                    <div className="whitespace-pre-wrap text-foreground leading-relaxed">
+                      {post.content}
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="prose prose-slate max-w-none">
-                <div className="whitespace-pre-wrap text-foreground leading-relaxed">
-                  {post.content}
-                </div>
-              </div>
+              </Card>
             </div>
-          </Card>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
-  );
+          </main>
+    
+          
+        </div>  );
 };
 
 export default BlogDetail;

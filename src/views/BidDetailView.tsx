@@ -136,7 +136,17 @@ const BidDetailView: React.FC<BidDetailViewProps> = ({ bid }) => {
                 <ul className="space-y-2">
                   {bid.attachments.map((file) => (
                     <li key={file.name}>
-                      <a href={file.url} className="flex items-center gap-2 text-blue-600 hover:underline">
+                      {/* [초보자 참고] 현재 링크가 동작하지 않음을 알리기 위해 onClick 이벤트를 추가하고 스타일을 변경합니다. */}
+                      {/* e.preventDefault()는 a 태그의 기본 동작(페이지 이동)을 막습니다. */}
+                      {/* [For Beginners] Add an onClick event and change styles to indicate the link is not active. */}
+                      {/* e.preventDefault() prevents the default link behavior (navigation). */}
+                      <a 
+                        href={file.url} 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          alert("첨부 파일 다운로드는 API 연동 후 제공될 예정입니다.");
+                        }}
+                        className="flex items-center gap-2 text-gray-400 cursor-not-allowed">
                         <DocumentTextIcon className="w-4 h-4" />
                         <span>{file.name}</span>
                       </a>
