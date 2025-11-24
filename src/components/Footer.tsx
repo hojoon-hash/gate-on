@@ -10,7 +10,6 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <Link to="/" className="flex items-center justify-center md:justify-start mb-2">
               <img src="/src/assets/gateon-logo.jpg" alt="GateOn Logo" className="h-6 mr-2" />
-              <span className="text-lg font-bold text-gray-800">GateOn</span>
             </Link>
             <p className="mt-2">© {new Date().getFullYear()} GateOn. All Rights Reserved.</p>
           </div>
